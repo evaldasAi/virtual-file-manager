@@ -12,10 +12,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'vfm:read',
-    description: 'Used to read virtual files and folders',
+    name: 'vfm:write',
+    description: 'Used to write, delete files or folders.',
 )]
-class VfmReaderCommand extends Command
+class VfmWriterCommand extends Command
 {
     public function __construct(private Reader $reader)
     {
@@ -26,7 +26,7 @@ class VfmReaderCommand extends Command
     {
         $this
             ->addArgument('path', InputArgument::OPTIONAL, 'The folder or file path', '/')
-            ->addOption('depth', null, InputOption::VALUE_OPTIONAL, 'Option description', 0)
+            ->addArgument('action', InputOption::VALUE_REQUIRED, 'Actions like create, delete files and folders')
         ;
     }
 
@@ -36,19 +36,16 @@ class VfmReaderCommand extends Command
 
         $path = $input->getArgument('path');
 
-        $depth = $input->getOption('depth');
+        $action = $input->getArgument('action');
 
-        try {
-            $info = $this->reader->read($path);
-        } catch(\Exception $exception){
-            $io->error($exception->getMessage());
+        if($action === 'create-folder') // TODO
 
-            // do other things, for example log message
+        if($action === 'delete-folder') // TODO
 
-            return Command::FAILURE;
-        }
+        if($action === 'add-file') // TODO
 
-        // Render $info
+        if($action === 'delete-file') // TODO
+
 
         return Command::SUCCESS;
     }

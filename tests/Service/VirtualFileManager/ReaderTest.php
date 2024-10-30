@@ -47,8 +47,13 @@ class ReaderTest extends TestCase
 
     public function testIsEmpty(): void
     {
-        $this->assertTrue($this->reader->isEmpty());
+        $this->assertTrue($this->reader->isFolderEmpty("/trash/"));
+
+        $this->assertFalse($this->reader->isFolderEmpty("/downloads/"));
     }
 
-    
+    public function testGetFile(): void
+    {
+        $this->assertEquals('img1.jpg',$this->reader->getFile("/downloads/images/img1.jpg"));
+    }
 }
