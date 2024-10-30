@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    storage_dir: '%kernel.project_dir%/storage/'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +23,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\VirtualFileManager\:
+        resource: '../src/Service/VirtualFileManager/*'
+        arguments:
+            $dataFile: '%storage_dir%/virtual_file_storage3.json'

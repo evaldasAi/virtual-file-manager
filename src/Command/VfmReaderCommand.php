@@ -41,8 +41,9 @@ class VfmReaderCommand extends Command
         try {
             $info = $this->reader->read($path, $depth);
         } catch(\Exception $exception){
-
             $io->error($exception->getMessage());
+
+            // do other things, for example log message
 
             return Command::FAILURE;
         }
