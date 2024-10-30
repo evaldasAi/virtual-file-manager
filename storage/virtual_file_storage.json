@@ -1,0 +1,26 @@
+
+{
+    "root": 
+        {
+            "folders": [
+                {
+                    "documents": {
+                        "folders" : [],
+                        "files": []
+                    },
+                    "downloads": {
+                        "folders" : [
+                            {
+                                "movies": {
+                                    "folders" : [],
+                                    "files": []
+                                }
+                            }
+                        ],
+                        "files": []
+                    }
+                }
+            ],
+            "files": ["image.jpg", "test.jpg"]
+        }
+}

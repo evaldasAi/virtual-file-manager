@@ -1,0 +1,17 @@
+
+{
+    "/": [
+        {
+            "documents/": []
+        },
+        {
+            "downloads/": [
+                {
+                    "favorite/": []
+                },
+                "item.txt",
+                "swan.jpg"
+            ]
+        }
+    ]
+}

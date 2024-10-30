@@ -1,0 +1,7 @@
+[
+    {"/": ["image1.txt", "image2.txt", "downloads/", "trash/"]}, 
+    {"/downloads/": ["movie.avi", "movie.mp4"]},
+    {"/downloads/movies/": ["titanic.avi", "interstellar.mp4"]},
+    {"/downloads/images/": ["img1.jpg", "img2.jpg"]},
+    {"/trash/": []}
+]
