@@ -50,12 +50,60 @@ class VirtualDataHandlerTest extends TestCase
         $this->assertEquals('img1.jpg',$this->dataHandler->getFile("/downloads/images/img1.jpg"));
     }
 
-    // public function addFile()
-    // {
-    //     $this->dataHandler->addFile('/', '/actual_folder/movie.avi');
-    // }
+    public function testAddFile()
+    {
+        $this->dataHandler->setData(self::rootData());
 
-    public static function exampleData(): array
+        $this->assertEquals([], $this->dataHandler->getData()['/']);
+
+        $this->dataHandler->addFile('/', '/actual_folder/movie.avi');
+        
+        $this->dataHandler->addFile('/', '/actual_folder/movie2.avi');
+        
+        $this->assertEquals(['movie.avi', 'movie2.avi'], $this->dataHandler->getData()['/']);
+
+        $this->expectExceptionMessage('File already exists.');
+
+        $this->dataHandler->addFile('/', '/actual_folder/movie2.avi');
+    }
+
+    public function testAddFolder(): void
+    {
+        $this->dataHandler->setData(self::exampleData());
+
+        $this->dataHandler->createFolder('/trash/', 'trash');
+        
+        $this->assertArrayHasKey('/trash/trash/', $this->dataHandler->getData());
+
+        $this->assertContains('trash/', $this->dataHandler->readDirectory('/trash/'));
+    }
+
+    public function testDeleteFolder(): void
+    {
+        $this->dataHandler->setData(self::exampleData());
+
+        $this->dataHandler->deleteFolder('/trash/');
+
+        $this->assertArrayNotHasKey('/trash/', $this->dataHandler->getData());
+
+        $this->assertNotContains('trash/', $this->dataHandler->readDirectory('/'));
+    }
+
+    public function testRemoveFile(): void
+    {
+        $this->dataHandler->setData(self::exampleData());
+
+        $this->dataHandler->removeFile("/downloads/movies/", "titanic.avi");
+        
+        $this->assertNotContains("titanic.avi", $this->dataHandler->readDirectory("/downloads/movies/"));
+    }
+
+    private static function rootData(): array
+    {
+        return ["/" => []];
+    }
+
+    private static function exampleData(): array
     {
         return [
             "/" => ["image1.txt", "image2.txt", "downloads/", "trash/"],

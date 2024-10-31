@@ -2,7 +2,7 @@
 
 namespace App\Service\VirtualFileManager;
 
-interface FileManagerInterface
+interface VirtualFileManagerInterface
 {
     public function readFromFile(): array;
 

@@ -2,7 +2,7 @@
 
 namespace App\Service\VirtualFileManager;
 
-class VirtualFileManager
+class VirtualFileManager implements VirtualFileManagerInterface
 {
     public function __construct(private string $dataFile)
     {
