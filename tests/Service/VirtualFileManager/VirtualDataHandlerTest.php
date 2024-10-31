@@ -82,11 +82,11 @@ class VirtualDataHandlerTest extends TestCase
     {
         $this->dataHandler->setData(self::exampleData());
 
-        $this->dataHandler->deleteFolder('/trash/');
+        $this->dataHandler->deleteFolder('/downloads/movies/');
 
-        $this->assertArrayNotHasKey('/trash/', $this->dataHandler->getData());
+        $this->assertArrayNotHasKey('/downloads/movies/', $this->dataHandler->getData());
 
-        $this->assertNotContains('trash/', $this->dataHandler->readDirectory('/'));
+        $this->assertNotContains('movies/', $this->dataHandler->readDirectory('/downloads/'));
     }
 
     public function testRemoveFile(): void

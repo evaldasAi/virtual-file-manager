@@ -51,26 +51,31 @@ class ManageVirtualFileCommand extends Command
                 $result = $this->virtualDataHandler->readDirectory($path);
                 break;
             case 'read-tree':
-                $result = $this->virtualDataHandler->readTree();
+                throw new \Exception('Not implemented yet.');
+                $result = $this->virtualDataHandler->readTree($path);
                 break;
             case 'add-file':
                 $this->virtualDataHandler->addFile($path, $fileOrFolderName);
+                $result = $this->virtualDataHandler->readDirectory($path);
                 break;
             case 'remove-file':
                 $this->virtualDataHandler->removeFile($path, $fileOrFolderName);
+                $result = $this->virtualDataHandler->readDirectory($path);
                 break;
             case 'create-folder':
                 $this->virtualDataHandler->createFolder($path, $fileOrFolderName);
+                $result = $this->virtualDataHandler->readDirectory($path); 
                 break;
             case 'delete-folder':
                 $this->virtualDataHandler->deleteFolder($path);
+                $result = $this->virtualDataHandler->readDirectory(dirname($path)); 
                 break;
             default:
                 throw new \InvalidArgumentException("Invalid action: $action");
         }
-
-        //$this->virtualFileManager->writeToFile(this->virtualDataHandler->getData());
-
+        
+        $this->virtualFileManager->writeToFile($this->virtualDataHandler->getData());
+        
         foreach($result as $name) {
             $io->writeln($name);
         }
