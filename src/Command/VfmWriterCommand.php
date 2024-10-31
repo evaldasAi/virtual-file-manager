@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\VirtualFileManager\Reader;
+use App\Service\VirtualFileManager\Writer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class VfmWriterCommand extends Command
 {
-    public function __construct(private Reader $reader)
+    public function __construct(private Writer $writer)
     {
         parent::__construct();
     }
@@ -38,13 +38,23 @@ class VfmWriterCommand extends Command
 
         $action = $input->getArgument('action');
 
-        if($action === 'create-folder') // TODO
+        $file = '';
 
-        if($action === 'delete-folder') // TODO
+        if ($action === 'create-folder') {
+            $this->writer->createFolder($path);
+        }
 
-        if($action === 'add-file') // TODO
+        if ($action === 'delete-folder') {
+            $this->writer->deleteFolder($path);
+        }
 
-        if($action === 'delete-file') // TODO
+        if ($action === 'add-file') {
+            $this->writer->addFile($path, $file);
+        }
+
+        if ($action === 'delete-file') {
+            $this->writer->removeFile($path, $file);
+        }
 
 
         return Command::SUCCESS;

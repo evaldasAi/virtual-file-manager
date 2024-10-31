@@ -31,17 +31,23 @@ class Reader
 
     public function read(string $path = '/'): array
     {
-        if (isset($this->data[$path])) {
-            $content = $this->data[$path];
+        $normalizedPath = self::normalizePath($path);
+
+        if (!isset($this->data[$normalizedPath])) {
+            throw new \Exception('Folder doesn\t exist.');
         }
 
-        if (isset($this->data["$path/"])) {
-            $content = $this->data["$path/"];
-        }
+        return $this->data[$normalizedPath];
+    }
 
-        if (!isset($content)) throw new \Exception('Folder doesn\t exist.');
+    public static function normalizePath(string $path): string
+    {
+        return rtrim($path, '/') . '/';
+    }
 
-        return $content;
+    public function readTree(string $path = '/', int $depth = 0): array
+    {
+        return [];
     }
 
     /**
@@ -50,11 +56,11 @@ class Reader
     public function getFile(string $filePath = '/'): ?string
     {
         $path = dirname($filePath);
-        $filename = basename($filePath);
+        $fileName = basename($filePath);
 
         $content = $this->read($path);
 
-        if (in_array($filename, $content)) return $filename;
+        if (in_array($fileName, $content)) return $fileName;
 
         return null;
     }
