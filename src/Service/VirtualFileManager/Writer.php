@@ -2,6 +2,9 @@
 
 namespace App\Service\VirtualFileManager;
 
+/**
+ * @deprecated
+ */
 class Writer
 {
     private array $data = [];

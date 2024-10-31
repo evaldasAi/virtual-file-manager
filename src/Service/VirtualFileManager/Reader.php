@@ -2,6 +2,9 @@
 
 namespace App\Service\VirtualFileManager;
 
+/**
+ * @deprecated
+ */
 class Reader
 {
     private array $data = [];

@@ -11,6 +11,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+
+/**
+ * @deprecated 
+ */
 #[AsCommand(
     name: 'vfm:write',
     description: 'Used to write, delete files or folders.',
